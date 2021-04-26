@@ -1,3 +1,5 @@
+//import store from "../store";
+
 /**
  * Dispatcher
  */
@@ -17,7 +19,13 @@ class Dispatcher extends EventTarget {
 const FETCH_TODO_ACTION_TYPE = "Fetch todo list from server";
 export const createFetchTodoListAction = () => ({
   type: FETCH_TODO_ACTION_TYPE,
-  paylaod: undefined,
+  payload: undefined,
+});
+
+const CREATE_TODO = "Create todo";
+export const createTodoAction = (todoName) => ({
+  type: CREATE_TODO,
+  payload: todoName,
 });
 
 const CLEAR_ERROR = "Clear error from state";
@@ -52,6 +60,25 @@ const reducer = async (prevState, { type, payload }) => {
     }
     case CLEAR_ERROR: {
       return { ...prevState, error: null };
+    }
+    case CREATE_TODO: {
+      try {
+        const data = {
+          "name": payload,
+          "done": false
+        }
+        prevState.todoList.push(payload);
+        const resp = await fetch(api, {
+          method: 'POST', 
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data) 
+        }).then((d) => d.json());
+        return { todoList: resp.todoList, error: null };
+      } catch (err) {
+        return { ...prevState, error: err };
+      }
     }
     default: {
       throw new Error("unexpected action type: %o", { type, payload });
