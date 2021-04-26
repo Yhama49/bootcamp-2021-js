@@ -8,8 +8,7 @@ class TodoForm {
   }
 
   mount() {
-    // TODO:
-    // ここに 作成ボタンが押されたら todo を作成するような処理を追記する
+    //  作成ボタンが押されたら todo を作成するような処理を追記する
     const submit = document.getElementById("submit");
     submit.addEventListener("click", function() {
       const name = document.getElementById("name");

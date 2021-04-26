@@ -8,7 +8,18 @@ class Todo {
   mount() {
     if (this.mounted) return;
     // TODO: ここにTODOの削除ボタンが押されたときの処理を追記
+    
     // TODO: ここにTODOのチェックボックスが押されたときの処理を追記
+    const updateElements = document.getElementsByClassName("todo-toggle");
+    console.log(updateElements);
+    //なぜかここが0になる。
+    console.log(updateElements.length);
+    
+    for (var i = 0; i < updateElements.length; i++) {
+      console.log(i);
+      console.log(updateElements[i]);
+    }
+
     this.mounted = true;
   }
 
@@ -36,6 +47,7 @@ class Todo {
       this.parent.replaceChild(this.element, next);
     }
     this.element = next;
+    this.mounted = false;
     this.mount();
   }
 }
