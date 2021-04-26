@@ -12,12 +12,14 @@ class Todo {
     // TODO: ここにTODOのチェックボックスが押されたときの処理を追記
     const updateElements = document.getElementsByClassName("todo-toggle");
     console.log(updateElements);
-    //なぜかここが0になる。
+
+    // 解決できなかったところ：なぜかここが0になる。
     console.log(updateElements.length);
-    
+
     for (var i = 0; i < updateElements.length; i++) {
       console.log(i);
       console.log(updateElements[i]);
+      // 解決できなかったところ：lengthが0になるので、この処理に入らない。ここでイベント登録したかった。
     }
 
     this.mounted = true;
